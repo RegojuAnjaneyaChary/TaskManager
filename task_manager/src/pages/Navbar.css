@@ -1,0 +1,14 @@
+#userinfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  color: #4B5563;
+  /* margin-left: 75%;
+   */
+   margin-right: 5rem;
+  transform: translateX(-50%);
+  /* Centers the element relative to its position */
+  position: relative;
+}
