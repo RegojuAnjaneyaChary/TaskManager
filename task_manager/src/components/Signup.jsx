@@ -13,7 +13,7 @@ const Signup = () => {
     username: "",
     email: "",
     password: "",
-    role: "employee", // default role
+    role: "employee",
   });
 
   const handleChange = (e) => {
@@ -26,7 +26,6 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // validation
     if (!formData.name || !formData.username || !formData.email || !formData.password) {
       toast.error("All fields are required");
       return;
@@ -38,15 +37,7 @@ const Signup = () => {
     }
 
     try {
-      // send role as part of request body
-      const response = await axios.post(`${apiUrl}/auth/signup`, {
-        name: formData.name,
-        username: formData.username,
-        email: formData.email,
-        password: formData.password,
-        role: formData.role, // ensure backend accepts this
-      });
-
+      const response = await axios.post(`${apiUrl}/auth/signup`, formData);
       if (response.data) {
         toast.success("Account created successfully!");
         setTimeout(() => navigate("/login"), 1000);
@@ -67,7 +58,6 @@ const Signup = () => {
           Create Your Account
         </h2>
 
-        {/* Name + Username */}
         <div className="mb-4 flex flex-col md:flex-row md:space-x-4">
           <div className="flex-1 mb-4 md:mb-0">
             <label className="block text-gray-700 font-semibold mb-2">Full Name</label>
@@ -93,7 +83,6 @@ const Signup = () => {
           </div>
         </div>
 
-        {/* Email + Role */}
         <div className="mb-4 flex flex-col md:flex-row md:space-x-4">
           <div className="flex-1 mb-4 md:mb-0">
             <label className="block text-gray-700 font-semibold mb-2">Email</label>
@@ -120,7 +109,6 @@ const Signup = () => {
           </div>
         </div>
 
-        {/* Password */}
         <div className="mb-6 relative">
           <label className="block text-gray-700 font-semibold mb-2">Password</label>
           <input
@@ -139,7 +127,6 @@ const Signup = () => {
           </span>
         </div>
 
-        {/* Submit */}
         <button
           type="submit"
           className="w-full py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
@@ -147,7 +134,6 @@ const Signup = () => {
           Sign Up
         </button>
 
-        {/* Login Redirect */}
         <p className="text-center mt-5 text-gray-600">
           Already have an account?{" "}
           <a href="/login" className="text-blue-500 font-semibold hover:underline">

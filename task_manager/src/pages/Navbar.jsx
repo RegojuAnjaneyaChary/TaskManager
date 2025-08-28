@@ -74,7 +74,7 @@ const Navbar = () => {
           {isMenuOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
               <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100">
-                Welcome, {user?.name || "Guest"}
+                Welcome, {user?.name}
               </div>
               <button
                 onClick={handleLogout}
@@ -90,7 +90,7 @@ const Navbar = () => {
       {/* Desktop User Info Section */}
       <div className="hidden md:flex items-center justify-center md:w-auto md:ml-auto gap-4">
         <span className="text-[0.95rem] text-gray-600">
-          Welcome, {user?.name || "Guest"}
+          Welcome, {user?.name }
         </span>
         <button
           onClick={handleLogout}
