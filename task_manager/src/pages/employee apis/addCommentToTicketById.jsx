@@ -30,7 +30,7 @@ const AddCommentToTicketById = () => {
 
       // Send POST request to backend
       const response = await axios.post(
-        `${apiUrl}/employee/addcommentToTicketByid/${ticketID}`,
+        `${apiUrl}/employee/addcommetToTicket/${ticketID}`,
         { comment }, // body matches your backend
         {
           headers: {
