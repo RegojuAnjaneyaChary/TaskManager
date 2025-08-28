@@ -1,13 +1,8 @@
-import React, { useState } from "react";
-import Sidebar from "../pages/employee apis/Sidebar";
-import MainBar from "../pages/employee apis/Mainbar";
+import React from "react";
 import Navbar from "../pages/Navbar";
+import EmployeeDashboardlayout from "../pages/dashboardlayout";
 
-function ManagerDashboard() {
-  // Uplifted state: determines which section is active
-  const [activeSection, setActiveSection] = useState("My Profile");
-
-
+const EmployeeDashboard = () => {
   return (
     <div className="flex flex-col h-screen">
       {/* Top Navbar */}
@@ -15,16 +10,10 @@ function ManagerDashboard() {
         <Navbar />
       </div>
 
-      {/* Sidebar + MainBar layout */}
-      <div className="flex flex-1">
-        <Sidebar
-          activeSection={activeSection}
-          onSectionChange={setActiveSection}
-        />
-        <MainBar activeSection={activeSection} />
-      </div>
+      {/* Dashboard Layout */}
+      <EmployeeDashboardlayout />
     </div>
   );
-}
+};
 
-export default ManagerDashboard;
+export default EmployeeDashboard;

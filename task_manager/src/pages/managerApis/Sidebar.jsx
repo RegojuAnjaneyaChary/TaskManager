@@ -1,20 +1,18 @@
 import React from "react";
 
 function Sidebar({ activeSection, onSectionChange }) {
- 
   const sections = [
-  "Manager Profile",
-  "Create Ticket",
-  
-  "All Tickets",
-  "Employee Directory"
-];
+    "Manager Profile",
+    "Create Ticket",
+    "All Tickets",
+    "Employee Directory"
+  ];
 
   return (
-    <div className="w-64 bg-gray-800 text-white p-4">
+    <div className="fixed top-16 left-0 w-[20%] h-[calc(100vh-4rem)] bg-gray-800 text-white p-6 shadow-lg overflow-y-auto">
       <h2 className="text-xl font-bold mb-6">Manager Dashboard</h2>
       <ul>
-        {sections.map(section => (
+        {sections.map((section) => (
           <li
             key={section}
             className={`p-3 cursor-pointer rounded-lg mb-2 transition-all duration-200

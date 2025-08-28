@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "../App";
 import { toast } from "react-hot-toast";
-import "./Profile.css";
 
 export default function EditProfile() {
   const [formData, setFormData] = useState({
@@ -18,7 +17,6 @@ export default function EditProfile() {
 
   const token = localStorage.getItem("token");
 
-  // Fetch existing profile details
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -36,73 +34,40 @@ export default function EditProfile() {
           role: data.role || "",
         });
       } catch (error) {
-        console.error("Error fetching profile:", error);
         toast.error("Failed to load profile");
       }
     };
     fetchProfile();
   }, [token]);
 
-  // Handle text changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle image changes
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      console.log("Selected file:", file);
-      setFormData((prev) => ({ ...prev, profilePic: file }));
-    }
+    if (file) setFormData((prev) => ({ ...prev, profilePic: file }));
   };
 
-  // Save profile changes
   const handleSave = async () => {
     setLoading(true);
     try {
       const updatedData = new FormData();
-
-      // Add text fields
       if (formData.name) updatedData.append("name", formData.name);
       if (formData.username) updatedData.append("username", formData.username);
       if (formData.email) updatedData.append("email", formData.email);
-
-      // Add password only if provided
-      if (formData.password.trim() !== "") {
-        updatedData.append("password", formData.password);
-      }
-
-      // Add file only if selected
-      if (formData.profilePic instanceof File) {
-        console.log("Uploading file:", formData.profilePic);
-        updatedData.append("profilePic", formData.profilePic);
-      }
-
-      console.log("Sending update with fields:", {
-        name: formData.name,
-        username: formData.username,
-        email: formData.email,
-        hasPassword: formData.password.trim() !== "",
-        hasFile: formData.profilePic instanceof File
-      });
+      if (formData.password.trim() !== "") updatedData.append("password", formData.password);
+      if (formData.profilePic instanceof File) updatedData.append("profilePic", formData.profilePic);
 
       const res = await axios.put(`${apiUrl}/user/editProfile`, updatedData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          // Don't set Content-Type for FormData
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
 
-      console.log("Update response:", res.data);
       toast.success(res.data.message || "Profile updated successfully!");
-
-      // Reset password field after successful update
       setFormData(prev => ({ ...prev, password: "" }));
 
     } catch (error) {
-      console.error("Error updating profile:", error);
       toast.error(error.response?.data?.message || "Failed to update profile");
     } finally {
       setLoading(false);
@@ -110,8 +75,9 @@ export default function EditProfile() {
   };
 
   return (
-    <div className="profile-container">
-      <h2>Edit Profile</h2>
+    <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-md">
+      <h2 className="text-2xl font-bold text-center mb-6">Edit Profile</h2>
+
       <img
         src={
           formData.profilePic instanceof File
@@ -119,16 +85,17 @@ export default function EditProfile() {
             : "/default-avatar.png"
         }
         alt="Profile"
-        className="profile-image"
+        className="w-28 h-28 mx-auto rounded-full border-4 border-blue-500 mb-6 object-cover"
       />
 
-      <div className="profile-edit">
+      <div className="space-y-4">
         <input
           type="text"
           name="name"
           value={formData.name}
           onChange={handleChange}
           placeholder="Name"
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <input
           type="text"
@@ -136,6 +103,7 @@ export default function EditProfile() {
           value={formData.username}
           onChange={handleChange}
           placeholder="Username"
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <input
           type="email"
@@ -143,6 +111,7 @@ export default function EditProfile() {
           value={formData.email}
           onChange={handleChange}
           placeholder="Email"
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <input
           type="password"
@@ -150,19 +119,25 @@ export default function EditProfile() {
           value={formData.password}
           onChange={handleChange}
           placeholder="New Password (leave blank to keep same)"
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <input
           type="file"
           accept="image/*"
           onChange={handleImageChange}
           name="profilePic"
+          className="w-full"
         />
 
         <p><strong>ID:</strong> {formData.id}</p>
         <p><strong>Role:</strong> {formData.role}</p>
 
-        <div className="profile-buttons">
-          <button onClick={handleSave} disabled={loading}>
+        <div className="flex justify-center gap-4 mt-4">
+          <button
+            onClick={handleSave}
+            disabled={loading}
+            className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition"
+          >
             {loading ? "Saving..." : "Save"}
           </button>
         </div>

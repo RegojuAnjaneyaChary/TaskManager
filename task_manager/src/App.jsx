@@ -12,19 +12,24 @@ import NotFound from './components/NotFound'
 import { Toaster } from 'react-hot-toast';
 import EditProfile from './pages/Editprofile'
 import Navbar from './pages/Navbar'
-import CreateTicket from './pages/manager apis/createTicket'
-import TicketbyId from './pages/manager apis/ticketbyId'
-import AllTickets from './pages/manager apis/allTickets'
-import Allemployeelist from './pages/manager apis/allemployeelist'
-import { ImOffice } from 'react-icons/im'
-import ViewAssignedTickets from './pages/employee apis/viewAssignedTickets'
-import ViewCommentsTicketById from './pages/employee apis/viewCommentsTicketById'
-import UpdateTicketStatusById from './pages/employee apis/updateTicketStatusById'
-import AddCommentToTicketById from './pages/employee apis/addCommentToTicketById'
-import Sidebar from './pages/manager apis/Sidebar'
-import Mainbar from './pages/manager apis/Mainbar'
+import CreateTicket from './pages/managerApis/createTicket'
+import TicketbyId from './pages/managerApis/ticketbyId'
+import AllTickets from './pages/managerApis/allTickets'
+import Allemployeelist from './pages/managerApis/allemployeelist'
+import { ImOffice, ImPodcast } from 'react-icons/im'
+import ViewAssignedTickets from './pages/employeeApis/viewAssignedTickets'
+import ViewCommentsTicketById from './pages/employeeApis/viewCommentsTicketById'
+import UpdateTicketStatusById from './pages/employeeApis/updateTicketStatusById'
+import AddCommentToTicketById from './pages/employeeApis/addCommentToTicketById'
+import Sidebar from './pages/managerApis/Sidebar'
+import Mainbar from './pages/managerApis/Mainbar'
+import DashboardLayout from './pages/DashboardLayout';
+import EmployeeDashboardlayout from './pages/dashboardlayout'
+import Employeesidebar from './pages/employeeApis/Sidebar'
+import Employeemainbar from './pages/employeeApis/Mainbar'
 
-  
+
+
 export const apiUrl = "https://nodejs-project-server.onrender.com";
 
 const App = () => {
@@ -59,7 +64,7 @@ const App = () => {
         <Route path="/navbar" element={<Navbar />} />
         <Route path="/createticket" element={<CreateTicket />} />
         {/* <Route path="/ticketbyid" element={<TicketbyId />} /> */}
-         <Route path="/ticket/:ticketID" element={<TicketbyId />} />
+        <Route path="/ticket/:ticketID" element={<TicketbyId />} />
         <Route path="/alltickets" element={<AllTickets />} />
         <Route path="/allemployeelist" element={<Allemployeelist />} />
         <Route path="/viewassignedtickets" element={<ViewAssignedTickets />} />
@@ -67,7 +72,13 @@ const App = () => {
         <Route path="/viewcommentsticketbyid" element={< ViewCommentsTicketById />} />
         <Route path="/addcommenttoticketbyid" element={<AddCommentToTicketById />} />
         <Route path="/sidebar" element={<Sidebar />} />
-         <Route path="/mainbar" element={< Mainbar/>} />
+        <Route path="/mainbar" element={< Mainbar />} />
+        <Route path="/DashboardLayout" element={< DashboardLayout />} />
+        <Route path="/DashboardLayout" element={< EmployeeDashboardlayout />} />
+        <Route path="/sidebar" element={< Employeesidebar />} />
+        <Route path="/mainbar" element={< Employeemainbar />} />
+
+
 
 
       </Routes>

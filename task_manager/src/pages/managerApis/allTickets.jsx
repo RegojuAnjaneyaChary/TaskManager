@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { apiUrl } from "../../App"; // Your backend base URL
+import { apiUrl } from "../../App";
 import { useNavigate } from "react-router-dom";
 
 const AllTickets = () => {
@@ -15,9 +15,7 @@ const AllTickets = () => {
 
     try {
       const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("No token found. Please login again.");
-      }
+      if (!token) throw new Error("No token found. Please login again.");
 
       const response = await axios.get(`${apiUrl}/ticket/allTickets`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -41,40 +39,30 @@ const AllTickets = () => {
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Your Assigned Tickets</h2>
+    <div className="max-w-4xl mx-auto p-6">
+      <h2 className="text-2xl font-semibold mb-4">Your Assigned Tickets</h2>
 
-      {loading && <p>Loading tickets...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {loading && <p className="text-gray-500">Loading tickets...</p>}
+      {error && <p className="text-red-600">{error}</p>}
 
       {tickets.length > 0 ? (
-        <div>
+        <div className="space-y-4">
           {tickets.map((ticket) => (
             <div
               key={ticket._id}
-              style={{
-                border: "1px solid #ccc",
-                padding: "15px",
-                margin: "10px 0",
-                borderRadius: "5px",
-              }}
+              className="border rounded-lg p-4 shadow-sm bg-white"
             >
-              <h3>{ticket.title}</h3>
-              <p>{ticket.description}</p>
-              <p>Status: {ticket.status}</p>
-              <p>Created At: {new Date(ticket.createdAt).toLocaleString()}</p>
+              <h3 className="text-lg font-bold">{ticket.title}</h3>
+              <p className="text-gray-700">{ticket.description}</p>
+              <p className="text-sm text-gray-500">
+                Status: <span className="font-medium">{ticket.status}</span>
+              </p>
+              <p className="text-sm text-gray-500">
+                Created At: {new Date(ticket.createdAt).toLocaleString()}
+              </p>
 
-              {/* View More button */}
               <button
-                style={{
-                  marginTop: "10px",
-                  padding: "8px 12px",
-                  background: "blue",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "4px",
-                  cursor: "pointer",
-                }}
+                className="mt-3 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                 onClick={() => navigate(`/ticket/${ticket._id}`)}
               >
                 View More
@@ -83,7 +71,7 @@ const AllTickets = () => {
           ))}
         </div>
       ) : (
-        !loading && <p>No tickets found.</p>
+        !loading && <p className="text-gray-600">No tickets found.</p>
       )}
     </div>
   );

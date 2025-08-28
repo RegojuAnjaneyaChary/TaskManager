@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import Sidebar from "../pages/manager apis/Sidebar";
-import MainBar from "../pages/manager apis/Mainbar";
+import Sidebar from "../pages/managerApis/Sidebar";
+import MainBar from "../pages/managerApis/Mainbar";
 import Navbar from "../pages/Navbar";
+import DashboardLayout from "../pages/DashboardLayout";
 
 function ManagerDashboard() {
   // Uplifted state: determines which section is active
@@ -13,15 +14,8 @@ function ManagerDashboard() {
       <div className="w-full">
         <Navbar />
       </div>
+      <DashboardLayout />
 
-      {/* Sidebar + MainBar layout */}
-      <div className="flex flex-1">
-        <Sidebar
-          activeSection={activeSection}
-          onSectionChange={setActiveSection}
-        />
-        <MainBar activeSection={activeSection} />
-      </div>
     </div>
   );
 }

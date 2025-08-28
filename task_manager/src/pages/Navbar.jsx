@@ -20,8 +20,8 @@ const Navbar = () => {
           },
         });
 
-        setUser(response.data); // Set user info
-        localStorage.setItem("userData", JSON.stringify(response.data)); // Optional
+        setUser(response.data);
+        localStorage.setItem("userData", JSON.stringify(response.data));
       } catch (error) {
         console.error("Failed to fetch user details:", error);
       }
@@ -37,7 +37,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex flex-col md:flex-row items-center justify-between h-auto md:h-16 px-4 md:px-6 py-3 bg-white shadow-lg">
+    <nav className="fixed top-0 left-0 w-full z-50 flex flex-col md:flex-row items-center justify-between h-auto md:h-16 px-4 md:px-6 py-3 bg-white shadow-lg">
       {/* Left Section: Logo + App Name */}
       <div className="flex items-center w-full md:w-auto justify-between md:justify-start mb-3 md:mb-0">
         <div className="flex items-center">
@@ -72,7 +72,7 @@ const Navbar = () => {
 
           {/* Mobile Dropdown Menu */}
           {isMenuOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
               <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100">
                 Welcome, {user?.name}
               </div>
@@ -90,7 +90,7 @@ const Navbar = () => {
       {/* Desktop User Info Section */}
       <div className="hidden md:flex items-center justify-center md:w-auto md:ml-auto gap-4">
         <span className="text-[0.95rem] text-gray-600">
-          Welcome, {user?.name }
+          Welcome, {user?.name}
         </span>
         <button
           onClick={handleLogout}
