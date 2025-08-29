@@ -1,23 +1,31 @@
 import React, { useState } from "react";
+import Navbar from "../pages/Navbar"; // import your Navbar
 import Sidebar from "../pages/managerApis/Sidebar";
-import MainBar from "../pages/managerApis/Mainbar";
-import Navbar from "../pages/Navbar";
-import DashboardLayout from "../pages/DashboardLayout";
+import Mainbar from "../pages/managerApis/Mainbar";
 
-function ManagerDashboard() {
-  // Uplifted state: determines which section is active
-  const [activeSection, setActiveSection] = useState("Overview");
+const Managerdashbrdlayout = () => {
+  const [activeSection, setActiveSection] = useState("Manager Profile");
 
   return (
-    <div className="flex flex-col h-screen">
-      {/* Top Navbar */}
-      <div className="w-full">
+    <div className="min-h-screen">
+      {/* Navbar at the top */}
+      <div className="w-full fixed top-0 left-0 z-50">
         <Navbar />
       </div>
-      <DashboardLayout />
 
+      {/* Sidebar + Mainbar */}
+      <div className="flex pt-16"> {/* pt-16 = height of Navbar so content is not hidden */}
+        <Sidebar 
+          activeSection={activeSection} 
+          onSectionChange={setActiveSection} 
+        />
+
+        <div className="ml-[20%] w-[80%] p-6">
+          <Mainbar activeSection={activeSection} />
+        </div>
+      </div>
     </div>
   );
-}
+};
 
-export default ManagerDashboard;
+export default Managerdashbrdlayout;

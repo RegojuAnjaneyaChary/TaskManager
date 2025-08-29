@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../pages/Navbar";
-import EmployeeDashboardlayout from "../pages/dashboardlayout";
+import EmployeeDashboardlayout from "../pages/empdashboardlayout";
 
 const EmployeeDashboard = () => {
   return (

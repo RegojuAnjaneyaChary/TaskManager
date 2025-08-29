@@ -9,7 +9,7 @@ function Mainbar({ activeSection }) {
   return (
     <div>
       {/* Page Header */}
-      <div>
+      {/* <div>
         <h1>{activeSection}</h1>
         <p>
           {activeSection === "Manager Profile" && "Manage your profile and settings"}
@@ -18,7 +18,7 @@ function Mainbar({ activeSection }) {
           {activeSection === "Ticket Details" && "Detailed view of the selected ticket"}
           {activeSection === "Employee Directory" && "Manage all employees"}
         </p>
-      </div>
+      </div> */}
 
       {/* Main Content */}
       <div>

@@ -23,8 +23,8 @@ import UpdateTicketStatusById from './pages/employeeApis/updateTicketStatusById'
 import AddCommentToTicketById from './pages/employeeApis/addCommentToTicketById'
 import Sidebar from './pages/managerApis/Sidebar'
 import Mainbar from './pages/managerApis/Mainbar'
-import DashboardLayout from './pages/DashboardLayout';
-import EmployeeDashboardlayout from './pages/dashboardlayout'
+import Managerdashbrdlayout from './pages/managerdashbrdlayout';
+import EmployeeDashboardlayout from './pages/empdashboardlayout'
 import Employeesidebar from './pages/employeeApis/Sidebar'
 import Employeemainbar from './pages/employeeApis/Mainbar'
 
@@ -73,7 +73,7 @@ const App = () => {
         <Route path="/addcommenttoticketbyid" element={<AddCommentToTicketById />} />
         <Route path="/sidebar" element={<Sidebar />} />
         <Route path="/mainbar" element={< Mainbar />} />
-        <Route path="/DashboardLayout" element={< DashboardLayout />} />
+        <Route path="/managerdashboardLayout" element={< Managerdashbrdlayout />} />
         <Route path="/DashboardLayout" element={< EmployeeDashboardlayout />} />
         <Route path="/sidebar" element={< Employeesidebar />} />
         <Route path="/mainbar" element={< Employeemainbar />} />
