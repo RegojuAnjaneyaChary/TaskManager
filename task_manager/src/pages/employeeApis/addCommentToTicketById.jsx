@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { apiUrl } from "../../App"; // your API base URL
+import { toast } from "react-hot-toast"; // ✅ import toast
 
 const AddCommentToTicketById = () => {
   const [ticketID, setTicketID] = useState(""); // MongoDB ticket ID
@@ -13,10 +14,12 @@ const AddCommentToTicketById = () => {
 
     if (!ticketID.trim()) {
       setMessage("⚠️ Ticket ID is required!");
+      toast.error("Ticket ID is required!");
       return;
     }
     if (!comment.trim()) {
       setMessage("⚠️ Comment cannot be empty!");
+      toast.error("Comment cannot be empty!");
       return;
     }
 
@@ -38,12 +41,13 @@ const AddCommentToTicketById = () => {
       );
 
       setMessage(response.data.message || "✅ Comment added successfully!");
+      toast.success(response.data.message || "Comment added successfully!");
       setComment("");
     } catch (error) {
       console.error("Add comment error:", error);
-      setMessage(
-        error.response?.data?.message || "❌ Failed to add comment"
-      );
+      const errorMessage = error.response?.data?.message || "❌ Failed to add comment";
+      setMessage(errorMessage);
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }

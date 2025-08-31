@@ -33,6 +33,7 @@ export default function EditProfile() {
           id: data._id || "",
           role: data.role || "",
         });
+        toast.success("Profile loaded successfully");
       } catch (error) {
         toast.error("Failed to load profile");
       }
@@ -47,11 +48,20 @@ export default function EditProfile() {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file) setFormData((prev) => ({ ...prev, profilePic: file }));
+    if (file) {
+      setFormData((prev) => ({ ...prev, profilePic: file }));
+      toast.success("Profile picture selected");
+    }
   };
 
   const handleSave = async () => {
+    if (!formData.name || !formData.username || !formData.email) {
+      toast.error("Name, Username, and Email are required!");
+      return;
+    }
+
     setLoading(true);
+    toast.loading("Updating profile...");
     try {
       const updatedData = new FormData();
       if (formData.name) updatedData.append("name", formData.name);
@@ -64,10 +74,11 @@ export default function EditProfile() {
         headers: { Authorization: `Bearer ${token}` },
       });
 
+      toast.dismiss(); // remove "loading..." toast
       toast.success(res.data.message || "Profile updated successfully!");
       setFormData(prev => ({ ...prev, password: "" }));
-
     } catch (error) {
+      toast.dismiss();
       toast.error(error.response?.data?.message || "Failed to update profile");
     } finally {
       setLoading(false);

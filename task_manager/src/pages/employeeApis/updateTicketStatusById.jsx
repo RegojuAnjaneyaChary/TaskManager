@@ -1,23 +1,22 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { apiUrl } from "../../App";
+import { toast } from "react-hot-toast";
 
 const UpdateTicketStatusById = () => {
   const [ticketID, setTicketID] = useState("");
   const [taskStatus, setTaskStatus] = useState("To do");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!ticketID) {
-      setMessage("⚠️ Ticket ID is required!");
+      toast.error("⚠️ Ticket ID is required!");
       return;
     }
 
     setLoading(true);
-    setMessage("");
 
     try {
       const token = localStorage.getItem("token");
@@ -33,12 +32,11 @@ const UpdateTicketStatusById = () => {
         }
       );
 
-      setMessage(response.data.message || "✅ Task updated successfully!");
+      toast.success(response.data.message || "✅ Task updated successfully!");
+      setTicketID(""); // clear field after success
     } catch (error) {
       console.error(error);
-      setMessage(
-        error.response?.data?.message || "❌ Failed to update task status"
-      );
+      toast.error(error.response?.data?.message || "❌ Failed to update task status");
     } finally {
       setLoading(false);
     }
@@ -91,21 +89,6 @@ const UpdateTicketStatusById = () => {
             {loading ? "Updating..." : "Update Status"}
           </button>
         </form>
-
-        {/* Message */}
-        {message && (
-          <div
-            className={`mt-6 text-center font-medium ${
-              message.includes("✅")
-                ? "text-green-600"
-                : message.includes("❌")
-                ? "text-red-600"
-                : "text-yellow-600"
-            }`}
-          >
-            {message}
-          </div>
-        )}
       </div>
     </div>
   );

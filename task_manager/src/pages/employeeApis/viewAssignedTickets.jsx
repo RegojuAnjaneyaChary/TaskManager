@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "../../App";
+import { toast } from "react-hot-toast";  // ✅ Import toast
 
 export default function ViewAssignedTickets() {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const fetchAssignedTasks = async () => {
@@ -21,13 +21,13 @@ export default function ViewAssignedTickets() {
 
         if (response.data.allTickets && response.data.allTickets.length > 0) {
           setTasks(response.data.allTickets);
-          setMessage(response.data.message);
+          toast.success(response.data.message || "Assigned tickets loaded");
         } else {
-          setMessage("No tasks found");
+          toast.error("No tasks found");
         }
       } catch (error) {
         console.error("Error fetching tasks:", error);
-        setMessage("Error fetching tasks");
+        toast.error("Error fetching tasks");
       } finally {
         setLoading(false);
       }
@@ -44,15 +44,10 @@ export default function ViewAssignedTickets() {
     );
 
   return (
-    // Add top margin to clear the navbar (assumes navbar height is 64px)
     <div className="mt-16 max-w-7xl mx-auto p-6">
       <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
         Assigned Tasks
       </h2>
-
-      {message && (
-        <p className="text-center text-red-500 font-medium mb-6">{message}</p>
-      )}
 
       {tasks.length > 0 ? (
         <div className="overflow-x-auto shadow-lg rounded-lg">

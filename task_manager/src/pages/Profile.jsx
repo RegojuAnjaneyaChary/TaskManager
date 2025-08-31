@@ -10,7 +10,7 @@ export default function Profile() {
     email: "",
     profilePic: null,
     id: "",
-    role: ""
+    role: "",
   });
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -32,6 +32,7 @@ export default function Profile() {
           id: data._id || "",
           role: data.role || "",
         });
+        toast.success("Profile loaded successfully!");
       } catch (error) {
         toast.error("Failed to fetch profile");
       }
@@ -55,14 +56,15 @@ export default function Profile() {
       const updatedData = new FormData();
       if (formData.name) updatedData.append("name", formData.name);
       if (formData.email) updatedData.append("email", formData.email);
-      if (formData.profilePic instanceof File) updatedData.append("profilePic", formData.profilePic);
+      if (formData.profilePic instanceof File)
+        updatedData.append("profilePic", formData.profilePic);
 
       const res = await axios.put(`${apiUrl}/user/editProfile`, updatedData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       setProfile(res.data.updateUser);
-      setFormData(prev => ({ ...prev, profilePic: null }));
+      setFormData((prev) => ({ ...prev, profilePic: null }));
       setEditing(false);
       toast.success(res.data.message || "Profile updated successfully!");
       localStorage.setItem("userData", JSON.stringify(res.data.updateUser));
@@ -76,7 +78,9 @@ export default function Profile() {
   return (
     <div className="pt-20 px-4 md:px-8 lg:px-16">
       <div className="max-w-xl mx-auto bg-white p-8 rounded-2xl shadow-md">
-        <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">My Profile</h2>
+        <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
+          My Profile
+        </h2>
 
         <div className="flex justify-center mb-6">
           <img
@@ -116,8 +120,12 @@ export default function Profile() {
               className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
-            <p><strong>ID:</strong> {formData.id}</p>
-            <p><strong>Role:</strong> {formData.role}</p>
+            <p>
+              <strong>ID:</strong> {formData.id}
+            </p>
+            <p>
+              <strong>Role:</strong> {formData.role}
+            </p>
 
             <div className="flex justify-center gap-4 mt-4">
               <button
@@ -128,7 +136,10 @@ export default function Profile() {
                 {loading ? "Saving..." : "Save"}
               </button>
               <button
-                onClick={() => setEditing(false)}
+                onClick={() => {
+                  setEditing(false);
+                  toast("Edit cancelled", { icon: "⚠️" });
+                }}
                 className="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 transition"
               >
                 Cancel
@@ -137,14 +148,25 @@ export default function Profile() {
           </div>
         ) : (
           <div className="space-y-3 text-center">
-            <p><strong>Name:</strong> {profile?.name || "Loading..."}</p>
-            <p><strong>Email:</strong> {profile?.email || "Loading..."}</p>
-            <p><strong>ID:</strong> {profile?._id || "Loading..."}</p>
-            <p><strong>Role:</strong> {profile?.role || "Loading..."}</p>
+            <p>
+              <strong>Name:</strong> {profile?.name || "Loading..."}
+            </p>
+            <p>
+              <strong>Email:</strong> {profile?.email || "Loading..."}
+            </p>
+            <p>
+              <strong>ID:</strong> {profile?._id || "Loading..."}
+            </p>
+            <p>
+              <strong>Role:</strong> {profile?.role || "Loading..."}
+            </p>
 
             <div className="flex justify-center mt-4">
               <button
-                onClick={() => setEditing(true)}
+                onClick={() => {
+                  setEditing(true);
+                  toast("Edit mode enabled", { icon: "✏️" });
+                }}
                 className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition"
               >
                 Edit Profile
