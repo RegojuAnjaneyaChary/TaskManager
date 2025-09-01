@@ -1,3 +1,6 @@
+
+
+
 // import React, { useEffect, useState } from "react";
 // import axios from "axios";
 // import { apiUrl } from "../../App";
@@ -64,19 +67,18 @@
 //               <th className="py-3 px-4 text-left">#</th>
 //               <th className="py-3 px-4 text-left">ID</th>
 //               <th className="py-3 px-4 text-left">Name</th>
+//               <th className="py-3 px-4 text-left">Email</th> {/* New Email Column */}
 //               <th className="py-3 px-4 text-left">Role</th>
 //               <th className="py-3 px-4 text-center">Actions</th>
 //             </tr>
 //           </thead>
 //           <tbody>
 //             {employees.map((emp, index) => (
-//               <tr
-//                 key={emp._id}
-//                 className="border-t hover:bg-gray-50 transition"
-//               >
+//               <tr key={emp._id} className="border-t hover:bg-gray-50 transition">
 //                 <td className="py-3 px-4">{index + 1}</td>
 //                 <td className="py-3 px-4">{emp._id}</td>
 //                 <td className="py-3 px-4 font-medium">{emp.name}</td>
+//                 <td className="py-3 px-4">{emp.email}</td> {/* Display Email */}
 //                 <td className="py-3 px-4">{emp.role}</td>
 //                 <td className="py-3 px-4 text-center">
 //                   <button
@@ -90,7 +92,7 @@
 //             ))}
 //             {employees.length === 0 && (
 //               <tr>
-//                 <td colSpan="5" className="py-4 text-center text-gray-500">
+//                 <td colSpan="6" className="py-4 text-center text-gray-500">
 //                   No employees found.
 //                 </td>
 //               </tr>
@@ -103,7 +105,6 @@
 // };
 
 // export default AllemployeeList;
-
 
 
 import React, { useEffect, useState } from "react";
@@ -127,6 +128,13 @@ const AllemployeeList = () => {
       });
 
       setEmployees(response.data.data);
+
+      // ✅ Toast if no employees
+      if (response.data.data.length === 0) {
+        toast("No employees found ⚠️");
+      } else {
+        toast.success("Employees loaded successfully ✅");
+      }
     } catch (err) {
       console.error("Error fetching employees:", err);
       setError(err.response?.data?.message || "Failed to fetch employees");
@@ -152,10 +160,10 @@ const AllemployeeList = () => {
       });
 
       setEmployees((prev) => prev.filter((emp) => emp._id !== employeeID));
-      toast.success(response.data.message || "Employee deleted successfully");
+      toast.success(response.data.message || "Employee deleted successfully ✅");
     } catch (err) {
       console.error("Error deleting employee:", err);
-      toast.error(err.response?.data?.message || "Failed to delete employee");
+      toast.error(err.response?.data?.message || "Failed to delete employee ❌");
     }
   };
 
@@ -210,4 +218,3 @@ const AllemployeeList = () => {
 };
 
 export default AllemployeeList;
-
