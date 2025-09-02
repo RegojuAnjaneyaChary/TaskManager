@@ -4,8 +4,8 @@ import Sidebar from "../pages/managerApis/Sidebar";
 import Mainbar from "../pages/managerApis/Mainbar";
 
 const Managerdashbrdlayout = () => {
-  const [activeSection, setActiveSection] = useState("Manager Profile");
-
+  const [activeSection, setActiveSection] = useState("Dashboard");
+ 
   return (
     <div className="min-h-screen">
       {/* Navbar at the top */}
@@ -15,9 +15,9 @@ const Managerdashbrdlayout = () => {
 
       {/* Sidebar + Mainbar */}
       <div className="flex pt-16"> {/* pt-16 = height of Navbar so content is not hidden */}
-        <Sidebar 
-          activeSection={activeSection} 
-          onSectionChange={setActiveSection} 
+        <Sidebar
+          activeSection={activeSection}
+          onSectionChange={setActiveSection}
         />
 
         <div className="ml-[20%] w-[80%] p-6">

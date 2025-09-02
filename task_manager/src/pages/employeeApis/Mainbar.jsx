@@ -4,13 +4,18 @@ import ViewAssignedTickets from "./viewAssignedTickets";
 import ViewCommentsTicketById from "./viewCommentsTicketById";
 import UpdateTicketStatusById from "./updateTicketStatusById";
 import AddCommentToTicketById from "./addCommentToTicketById";
+import Employeehome from "./employeehome";
+
 
 function Employeemainbar({ activeSection }) {
   return (
     <div>
-      <h1>{activeSection}</h1>
+      {/* <h1>{activeSection} </h1> */}
+
 
       <div>
+        {activeSection === "Home" && <Employeehome />}
+        
         {activeSection === "My Profile" && <Profile />}
 
         {activeSection === "My Assigned Tickets" && <ViewAssignedTickets />}

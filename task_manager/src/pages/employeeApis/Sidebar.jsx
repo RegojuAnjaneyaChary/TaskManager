@@ -2,11 +2,13 @@ import React from "react";
 
 function Employeesidebar({ activeSection, onSectionChange }) {
   const sections = [
+    "Home",
     "My Profile",
     "My Assigned Tickets",
     "Update Ticket Status",
     "View Ticket Comments",
-    "Add Comment to Ticket",
+    "Add Comment to Ticket"
+    
   ];
 
   return (

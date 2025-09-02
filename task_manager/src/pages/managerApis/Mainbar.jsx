@@ -4,24 +4,14 @@ import Profile from "../Profile";
 import AllTickets from "./allTickets";
 import CreateTicket from "./createTicket";
 import TicketbyId from "./ticketbyId";
+import Managerhome from "./managerhome";
 
 function Mainbar({ activeSection }) {
   return (
     <div>
-      {/* Page Header */}
-      {/* <div>
-        <h1>{activeSection}</h1>
-        <p>
-          {activeSection === "Manager Profile" && "Manage your profile and settings"}
-          {activeSection === "Create Ticket" && "Create new tasks for employees"}
-          {activeSection === "All Tickets" && "View all tasks you have created"}
-          {activeSection === "Ticket Details" && "Detailed view of the selected ticket"}
-          {activeSection === "Employee Directory" && "Manage all employees"}
-        </p>
-      </div> */}
-
-      {/* Main Content */}
+     
       <div>
+        {activeSection === "Dashboard" && <Managerhome />}
         {activeSection === "Manager Profile" && <Profile />}
         {activeSection === "Create Ticket" && <CreateTicket />}
         {activeSection === "Ticket Details" && <TicketbyId />}

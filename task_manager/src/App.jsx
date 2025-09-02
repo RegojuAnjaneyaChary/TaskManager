@@ -27,6 +27,9 @@ import Managerdashbrdlayout from './pages/managerdashbrdlayout';
 import EmployeeDashboardlayout from './pages/empdashboardlayout'
 import Employeesidebar from './pages/employeeApis/Sidebar'
 import Employeemainbar from './pages/employeeApis/Mainbar'
+import Employeehome from "./pages/employeeApis/employeehome"
+import Managerhome from "./pages/managerApis/managerhome"
+import Homebar from './pages/managerApis/Homebar'
 
 
 
@@ -58,7 +61,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/managerdashboard" element={<ManagerDashboard />} />
+        <Route path="/managerdashboard" element={<Managerdashbrdlayout />} />
         <Route path="/employeedashboard" element={<EmployeeDashboard />} />
         <Route path="/profilepage" element={<Profile />} />
         <Route path="/notfound" element={<NotFound />} />
@@ -79,9 +82,9 @@ const App = () => {
         <Route path="/DashboardLayout" element={< EmployeeDashboardlayout />} />
         <Route path="/sidebar" element={< Employeesidebar />} />
         <Route path="/mainbar" element={< Employeemainbar />} />
-
-
-
+        <Route path="/employeehome" element={< Employeehome />} />
+        <Route path="/managerhome" element={< Managerhome />} />
+        {/* <Route path="/homebar" element={< Homebar />} /> */}
 
       </Routes>
     </div>
