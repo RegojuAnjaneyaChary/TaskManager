@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -35,7 +34,7 @@ const TicketbyId = () => {
       } catch (err) {
         const errorMessage = err.response?.data?.message || err.message;
         setError(errorMessage);
-        toast.error(errorMessage); // ✅ Show toast on error
+        toast.error(errorMessage);
       } finally {
         setLoading(false);
       }
@@ -44,37 +43,64 @@ const TicketbyId = () => {
     fetchTicket();
   }, [ticketID]);
 
-  if (loading) return <p className="text-gray-500">Loading ticket details...</p>;
-  if (error) return <p className="text-red-600">{error}</p>;
+  if (loading)
+    return (
+      <p className="text-gray-500 text-center animate-pulse mt-10">
+        Loading ticket details...
+      </p>
+    );
+  if (error)
+    return <p className="text-red-600 text-center mt-10">{error}</p>;
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h2 className="text-2xl font-semibold mb-4">Ticket Details</h2>
+    <div className="max-w-4xl mx-auto p-6">
+      <h2 className="text-3xl font-bold mb-6 text-center text-indigo-700">
+        🎫 Ticket Details
+      </h2>
 
       {ticket ? (
-        <div className="border rounded-lg p-6 shadow-sm bg-white space-y-2">
-          <h3 className="text-xl font-bold">{ticket.title}</h3>
-          <p>
-            <span className="font-medium">Description:</span> {ticket.description}
+        <div className="border rounded-2xl p-6 shadow-lg bg-gradient-to-r from-indigo-50 to-blue-100 space-y-4">
+          <h3 className="text-2xl font-semibold text-indigo-800">
+            {ticket.title}
+          </h3>
+
+          <p className="text-gray-700">
+            <span className="font-semibold text-indigo-700">Description:</span>{" "}
+            {ticket.description}
           </p>
-          <p>
-            <span className="font-medium">Status:</span> {ticket.status}
+
+          <p className="text-gray-700">
+            <span className="font-semibold text-indigo-700">Status:</span>{" "}
+            <span
+              className={`px-2 py-1 rounded text-white text-sm ${
+                ticket.status === "Open"
+                  ? "bg-green-500"
+                  : ticket.status === "In Progress"
+                  ? "bg-yellow-500"
+                  : "bg-red-500"
+              }`}
+            >
+              {ticket.status}
+            </span>
           </p>
-          <p className="text-sm text-gray-600">
-            <span className="font-medium">Created At:</span>{" "}
+
+          <p className="text-gray-600">
+            <span className="font-semibold text-indigo-700">Created At:</span>{" "}
             {new Date(ticket.createdAt).toLocaleString()}
           </p>
-          <p>
-            <span className="font-medium">Created By:</span>{" "}
+
+          <p className="text-gray-700">
+            <span className="font-semibold text-indigo-700">Created By:</span>{" "}
             {ticket.createdBy?.name || "N/A"}
           </p>
-          <p>
-            <span className="font-medium">Assigned To:</span>{" "}
+
+          <p className="text-gray-700">
+            <span className="font-semibold text-indigo-700">Assigned To:</span>{" "}
             {ticket.assignTo?.name || "N/A"}
           </p>
         </div>
       ) : (
-        <p className="text-gray-600">No ticket found.</p>
+        <p className="text-gray-600 text-center">No ticket found.</p>
       )}
     </div>
   );

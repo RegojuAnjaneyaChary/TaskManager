@@ -32,9 +32,8 @@ export default function Profile() {
           id: data._id || "",
           role: data.role || "",
         });
-        toast.success("Profile loaded successfully!");
       } catch (error) {
-        toast.error("Failed to fetch profile");
+        toast.error("Failed to fetch profile ❌");
       }
     };
     fetchProfile();
@@ -66,22 +65,23 @@ export default function Profile() {
       setProfile(res.data.updateUser);
       setFormData((prev) => ({ ...prev, profilePic: null }));
       setEditing(false);
-      toast.success(res.data.message || "Profile updated successfully!");
+      toast.success(res.data.message || "Profile updated ✅");
       localStorage.setItem("userData", JSON.stringify(res.data.updateUser));
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to update profile");
+      toast.error(error.response?.data?.message || "Failed to update profile ❌");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="pt-20 px-4 md:px-8 lg:px-16">
-      <div className="max-w-xl mx-auto bg-white p-8 rounded-2xl shadow-md">
-        <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
+    <div className="pt-16 px-4 md:px-6">
+      <div className="max-w-md mx-auto bg-white p-6 rounded-2xl shadow-lg">
+        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
           My Profile
         </h2>
 
+        {/* Avatar */}
         <div className="flex justify-center mb-6">
           <img
             src={
@@ -90,7 +90,7 @@ export default function Profile() {
                 : profile?.profilePic || "/default-avatar.png"
             }
             alt="Profile"
-            className="w-28 h-28 rounded-full border-4 border-blue-500 object-cover"
+            className="w-24 h-24 rounded-full border-4 border-blue-500 object-cover"
           />
         </div>
 
@@ -102,7 +102,7 @@ export default function Profile() {
               value={formData.name}
               onChange={handleChange}
               placeholder="Name"
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="email"
@@ -110,36 +110,37 @@ export default function Profile() {
               value={formData.email}
               onChange={handleChange}
               placeholder="Email"
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="file"
               accept="image/*"
               onChange={handleImageChange}
               name="profilePic"
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border rounded-lg"
             />
 
-            <p>
-              <strong>ID:</strong> {formData.id}
+            <p className="text-gray-600">
+              <strong>ID:</strong>{" "}
+              <span className="bg-gray-100 px-2 py-1 rounded">{formData.id}</span>
             </p>
-            <p>
-              <strong>Role:</strong> {formData.role}
+            <p className="text-gray-600">
+              <strong>Role:</strong>{" "}
+              <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded">
+                {formData.role}
+              </span>
             </p>
 
             <div className="flex justify-center gap-4 mt-4">
               <button
                 onClick={handleSave}
                 disabled={loading}
-                className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition"
+                className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 disabled:opacity-50 transition"
               >
                 {loading ? "Saving..." : "Save"}
               </button>
               <button
-                onClick={() => {
-                  setEditing(false);
-                  toast("Edit cancelled", { icon: "⚠️" });
-                }}
+                onClick={() => setEditing(false)}
                 className="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 transition"
               >
                 Cancel
@@ -147,7 +148,7 @@ export default function Profile() {
             </div>
           </div>
         ) : (
-          <div className="space-y-3 text-center">
+          <div className="space-y-3 text-center text-gray-700">
             <p>
               <strong>Name:</strong> {profile?.name || "Loading..."}
             </p>
@@ -155,18 +156,21 @@ export default function Profile() {
               <strong>Email:</strong> {profile?.email || "Loading..."}
             </p>
             <p>
-              <strong>ID:</strong> {profile?._id || "Loading..."}
+              <strong>ID:</strong>{" "}
+              <span className="bg-gray-100 px-2 py-1 rounded">
+                {profile?._id || "Loading..."}
+              </span>
             </p>
             <p>
-              <strong>Role:</strong> {profile?.role || "Loading..."}
+              <strong>Role:</strong>{" "}
+              <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded">
+                {profile?.role || "Loading..."}
+              </span>
             </p>
 
             <div className="flex justify-center mt-4">
               <button
-                onClick={() => {
-                  setEditing(true);
-                  toast("Edit mode enabled", { icon: "✏️" });
-                }}
+                onClick={() => setEditing(true)}
                 className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition"
               >
                 Edit Profile

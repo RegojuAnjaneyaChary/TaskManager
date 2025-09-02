@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -30,13 +29,13 @@ const Home = () => {
         <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-800">
           Organize. Track. Achieve.
         </h2>
-        <p className="text-gray-700 max-w-2xl mb-8 text-lg">
+        <p className="text-gray-700 max-w-2xl mb-8 text-lg md:text-xl">
           TaskTrack helps you manage your daily tasks efficiently, collaborate with your team, 
           and achieve goals faster. Stay organized and boost productivity effortlessly.
         </p>
         <Link
           to="/signup"
-          className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300"
+          className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300 shadow-md hover:shadow-lg"
         >
           Get Started
         </Link>
@@ -60,8 +59,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-   
 
       {/* Footer */}
       <footer className="bg-white shadow-inner mt-auto py-6 text-center text-gray-600">

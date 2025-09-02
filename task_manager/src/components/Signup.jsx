@@ -18,7 +18,7 @@ const Signup = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
@@ -38,10 +38,8 @@ const Signup = () => {
 
     try {
       const response = await axios.post(`${apiUrl}/auth/signup`, formData);
-      if (response.data) {
-        toast.success("Account created successfully!");
-        setTimeout(() => navigate("/login"), 1000);
-      }
+      toast.success("Account created successfully!");
+      setTimeout(() => navigate("/login"), 1000);
     } catch (error) {
       console.error("Signup error:", error);
       toast.error(error.response?.data?.message || "Signup failed");
@@ -49,79 +47,69 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <form
         onSubmit={handleSubmit}
-        className="bg-white rounded-2xl shadow-lg p-10 w-full max-w-2xl"
+        className="bg-white rounded-2xl shadow-lg p-8 md:p-10 w-full max-w-2xl"
       >
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
           Create Your Account
         </h2>
 
-        <div className="mb-4 flex flex-col md:flex-row md:space-x-4">
-          <div className="flex-1 mb-4 md:mb-0">
-            <label className="block text-gray-700 font-semibold mb-2">Full Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Enter your full name"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-          <div className="flex-1">
-            <label className="block text-gray-700 font-semibold mb-2">Username</label>
-            <input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              placeholder="Choose a username"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
+        {/* Name & Username */}
+        <div className="flex flex-col md:flex-row md:space-x-4 mb-4">
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Full Name"
+            className="flex-1 mb-4 md:mb-0 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <input
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            placeholder="Username"
+            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
         </div>
 
-        <div className="mb-4 flex flex-col md:flex-row md:space-x-4">
-          <div className="flex-1 mb-4 md:mb-0">
-            <label className="block text-gray-700 font-semibold mb-2">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Enter your email"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-          <div className="flex-1">
-            <label className="block text-gray-700 font-semibold mb-2">Role</label>
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-              <option value="employee">Employee</option>
-              <option value="manager">Manager</option>
-            </select>
-          </div>
+        {/* Email & Role */}
+        <div className="flex flex-col md:flex-row md:space-x-4 mb-4">
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email"
+            className="flex-1 mb-4 md:mb-0 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <select
+            name="role"
+            value={formData.role}
+            onChange={handleChange}
+            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          >
+            <option value="employee">Employee</option>
+            <option value="manager">Manager</option>
+          </select>
         </div>
 
-        <div className="mb-6 relative">
-          <label className="block text-gray-700 font-semibold mb-2">Password</label>
+        {/* Password */}
+        <div className="relative mb-6">
           <input
             type={showPassword ? "text" : "password"}
             name="password"
             value={formData.password}
             onChange={handleChange}
-            placeholder="Create a password"
+            placeholder="Password"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           <span
             onClick={togglePasswordVisibility}
-            className="absolute right-3 top-11 cursor-pointer text-gray-500"
+            className="absolute right-3 top-3 cursor-pointer text-gray-500"
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </span>
@@ -129,7 +117,7 @@ const Signup = () => {
 
         <button
           type="submit"
-          className="w-full py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
+          className="w-full py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition"
         >
           Sign Up
         </button>

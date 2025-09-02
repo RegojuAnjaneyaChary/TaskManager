@@ -1,9 +1,7 @@
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "../../App";
 import { toast } from "react-hot-toast";
-
 
 const AllemployeeList = () => {
   const [employees, setEmployees] = useState([]);
@@ -22,7 +20,6 @@ const AllemployeeList = () => {
 
       setEmployees(response.data.data);
 
-      // ✅ Toast if no employees
       if (response.data.data.length === 0) {
         toast("No employees found ⚠️");
       } else {
@@ -60,32 +57,52 @@ const AllemployeeList = () => {
     }
   };
 
-  if (loading) return <p className="text-center py-4">Loading employees...</p>;
-  if (error) return <p className="text-red-500 text-center py-4">{error}</p>;
+  if (loading)
+    return <p className="text-center py-6 text-gray-500 animate-pulse">Loading employees...</p>;
+  if (error)
+    return <p className="text-red-600 text-center py-6">{error}</p>;
 
   return (
-    <div className="p-6">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800">Employee List</h2>
-      <div className="overflow-x-auto shadow-lg rounded-lg border border-gray-200">
+    <div className="p-6 max-w-6xl mx-auto">
+      <h2 className="text-3xl font-bold mb-6 text-center text-indigo-700">
+        👥 Employee Directory
+      </h2>
+
+      <div className="overflow-x-auto shadow-xl rounded-2xl border border-gray-200">
         <table className="min-w-full bg-white text-sm">
-          <thead className="bg-gray-100 text-gray-700 uppercase text-xs">
+          <thead className="bg-gradient-to-r from-indigo-500 to-blue-600 text-white uppercase text-xs">
             <tr>
               <th className="py-3 px-4 text-left">#</th>
               <th className="py-3 px-4 text-left">ID</th>
               <th className="py-3 px-4 text-left">Name</th>
-              <th className="py-3 px-4 text-left">Email</th> {/* New Email Column */}
+              <th className="py-3 px-4 text-left">Email</th>
               <th className="py-3 px-4 text-left">Role</th>
               <th className="py-3 px-4 text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
             {employees.map((emp, index) => (
-              <tr key={emp._id} className="border-t hover:bg-gray-50 transition">
+              <tr
+                key={emp._id}
+                className="border-t hover:bg-indigo-50 transition duration-200"
+              >
                 <td className="py-3 px-4">{index + 1}</td>
-                <td className="py-3 px-4">{emp._id}</td>
-                <td className="py-3 px-4 font-medium">{emp.name}</td>
-                <td className="py-3 px-4">{emp.email}</td> {/* Display Email */}
-                <td className="py-3 px-4">{emp.role}</td>
+                <td className="py-3 px-4 text-gray-600">{emp._id}</td>
+                <td className="py-3 px-4 font-medium text-gray-800">{emp.name}</td>
+                <td className="py-3 px-4 text-gray-700">{emp.email}</td>
+                <td className="py-3 px-4">
+                  <span
+                    className={`px-2 py-1 rounded text-white text-xs ${
+                      emp.role === "Manager"
+                        ? "bg-green-600"
+                        : emp.role === "Employee"
+                        ? "bg-blue-500"
+                        : "bg-gray-500"
+                    }`}
+                  >
+                    {emp.role}
+                  </span>
+                </td>
                 <td className="py-3 px-4 text-center">
                   <button
                     onClick={() => handleDelete(emp._id)}
@@ -98,7 +115,7 @@ const AllemployeeList = () => {
             ))}
             {employees.length === 0 && (
               <tr>
-                <td colSpan="6" className="py-4 text-center text-gray-500">
+                <td colSpan="6" className="py-6 text-center text-gray-500">
                   No employees found.
                 </td>
               </tr>
