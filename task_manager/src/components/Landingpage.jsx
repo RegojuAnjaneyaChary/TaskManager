@@ -7,7 +7,7 @@ const Home = () => {
       
       {/* Navbar */}
       <header className="flex justify-between items-center p-6 bg-white shadow-md sticky top-0 z-50">
-        <h1 className="text-3xl font-bold text-blue-600">TaskTrack</h1>
+        <h1 className="text-3xl font-bold text-black-600">TaskTrack</h1>
         <nav className="space-x-4">
           <Link
             to="/login"
