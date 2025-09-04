@@ -30,7 +30,7 @@ const Home = () => {
           Organize. Track. Achieve.
         </h2>
         <p className="text-gray-700 max-w-2xl mb-8 text-lg md:text-xl">
-          TaskTrack helps you manage your daily tasks efficiently, collaborate with your team, 
+          Task Manager helps you manage your daily tasks efficiently, collaborate with your team, 
           and achieve goals faster. Stay organized and boost productivity effortlessly.
         </p>
         <Link
@@ -62,7 +62,7 @@ const Home = () => {
 
       {/* Footer */}
       <footer className="bg-white shadow-inner mt-auto py-6 text-center text-gray-600">
-        © {new Date().getFullYear()} TaskTrack. All rights reserved.
+        © {new Date().getFullYear()} Task Manager. All rights reserved.
       </footer>
     </div>
   );
