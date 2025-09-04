@@ -6,7 +6,7 @@ const Home = () => {
     <div className="flex flex-col min-h-screen font-sans bg-gray-50">
       
       {/* Navbar */}
-      <header className="flex justify-between items-center p-6 bg-white shadow-md sticky top-0 z-50">
+      {/* <header className="flex justify-between items-center p-6 bg-white shadow-md sticky top-0 z-50">
         <h1 className="text-3xl font-bold text-black-600">Task Management</h1>
         <nav className="space-x-4">
           <Link
@@ -22,7 +22,32 @@ const Home = () => {
             Sign Up
           </Link>
         </nav>
-      </header>
+      </header> */}
+
+   <header className="flex flex-wrap justify-between items-center p-4 bg-white shadow-md sticky top-0 z-50">
+  {/* Logo */}
+  <h1 className="text-xl md:text-3xl font-bold text-gray-800 mb-2 md:mb-0">
+    Task Management
+  </h1>
+
+  {/* Nav */}
+  <nav className="flex space-x-3">
+    <Link
+      to="/login"
+      className="px-4 py-2 rounded-lg border border-blue-600 text-blue-600 font-medium hover:bg-blue-50 transition duration-200 text-sm md:text-base"
+    >
+      Login
+    </Link>
+    <Link
+      to="/signup"
+      className="px-4 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 shadow-md transition duration-200 text-sm md:text-base"
+    >
+      Sign Up
+    </Link>
+  </nav>
+</header>
+
+
 
       {/* Hero Section */}
       <main className="flex flex-col items-center justify-center text-center px-6 py-32 bg-gradient-to-r from-blue-100 to-blue-200">

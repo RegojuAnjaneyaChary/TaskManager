@@ -150,12 +150,12 @@ const Navbar = () => {
       <div className="flex items-center justify-between w-full md:w-auto mb-3 md:mb-0">
         <div className="flex items-center gap-2">
           <img
-            src="/Logo.png"
+            src="/task.png"
             alt="Logo"
             className="w-12 h-12 object-contain rounded-md"
           />
           <span className="text-xl font-semibold text-black tracking-wide">
-            TaskTrack
+            Task Management
           </span>
         </div>
 
