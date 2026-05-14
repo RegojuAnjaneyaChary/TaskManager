@@ -42,7 +42,16 @@ const Signup = () => {
       setTimeout(() => navigate("/login"), 1000);
     } catch (error) {
       console.error("Signup error:", error);
-      toast.error(error.response?.data?.message || "Signup failed");
+      let errorMessage = error.response?.data?.message || "Signup failed";
+      
+      // Handle MongoDB duplicate key error gracefully
+      if (errorMessage.includes("E11000 duplicate key") && errorMessage.includes("username")) {
+        errorMessage = "This username is already taken. Please choose another one.";
+      } else if (errorMessage.includes("E11000 duplicate key") && errorMessage.includes("email")) {
+        errorMessage = "An account with this email already exists.";
+      }
+      
+      toast.error(errorMessage);
     }
   };
 

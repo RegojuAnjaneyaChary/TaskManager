@@ -1,7 +1,6 @@
 import React from "react";
 
 function Sidebar({ activeSection, onSectionChange }) {
-  console.log(activeSection, onSectionChange)
   const sections = [
     "Dashboard",
     "Manager Profile",
