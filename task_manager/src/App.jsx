@@ -33,8 +33,8 @@ import Homebar from './pages/managerApis/Homebar'
 
 
 
-// export const apiUrl = "https://nodejs-project-server.onrender.com";
-export const apiUrl = "http://localhost:8000";
+export const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+
 
 const App = () => {
   return (
