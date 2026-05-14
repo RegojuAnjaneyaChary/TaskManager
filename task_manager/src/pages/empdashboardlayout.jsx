@@ -96,7 +96,7 @@ export default function EmployeeDashboardLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
  
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen overflow-hidden">
       {/* Navbar */}
       
       <Navbar />
@@ -125,7 +125,7 @@ export default function EmployeeDashboardLayout() {
         )}
 
         {/* Main content */}
-        <div className="flex-1 flex flex-col items-center justify-start bg-gray-100 p-4 md:ml-64 overflow-y-auto" style={{ marginLeft: 0 }} >
+        <div className="flex-1 flex flex-col items-center justify-start bg-gray-100 p-4 overflow-y-auto" >
           {/* Mobile Hamburger Button */}
           <div className="w-full md:hidden flex justify-between items-center mb-4">
             <button

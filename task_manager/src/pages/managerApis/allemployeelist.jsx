@@ -63,14 +63,14 @@ const AllemployeeList = () => {
     return <p className="text-red-600 text-center py-6">{error}</p>;
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
+    <div className="p-6 max-w-7xl mx-auto">
       <h2 className="text-3xl font-bold mb-6 text-center text-indigo-700">
         👥 Employee Directory
       </h2>
 
-      <div className="overflow-x-auto shadow-xl rounded-2xl border border-gray-200">
+      <div className="max-h-[75vh] overflow-auto shadow-xl rounded-2xl border border-gray-200">
         <table className="min-w-full bg-white text-sm">
-          <thead className="bg-gradient-to-r from-indigo-500 to-blue-600 text-white uppercase text-xs">
+          <thead className="bg-gradient-to-r from-indigo-500 to-blue-600 text-white uppercase text-xs sticky top-0 z-10">
             <tr>
               <th className="py-3 px-4 text-left">#</th>
               <th className="py-3 px-4 text-left">ID</th>
